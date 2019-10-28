@@ -1,0 +1,2 @@
+# GAMERPGTEXT
+Game DOM Rpg Text
