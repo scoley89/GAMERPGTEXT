@@ -1,15 +1,13 @@
 const textElement = document.getElementById("text");
 const optionButtonsElement = document.getElementById("option-buttons");
 
-let state = {};
-
 function startGame() {
-  state = {};
+  // state = {};
   showTextNode(1);
 }
 
 function showTextNode(textNodeIndex) {
-  const textNode = textNodes.find(textNode => textNode.id === textNodeIndex);
+  const textNode = textNodes().find(textNode => textNode.id === textNodeIndex);
   textElement.innerText = textNode.text;
   while (optionButtonsElement.firstChild) {
     optionButtonsElement.removeChild(optionButtonsElement.firstChild);
@@ -36,4 +34,37 @@ function selectOption(option) {
   showTextNode(nextTextNodeId);
 }
 
-startGame();
+function hello(e) {
+  e.preventDefault();
+  let value = document.getElementById("something");
+  // state.name = e.target.value;
+  state.name = value.value;
+  console.log(state.name);
+  const allButtons = document.querySelectorAll(".btn");
+  allButtons.forEach(el => {
+    el.setAttribute("style", "visibility: visible");
+  });
+  textElement.setAttribute("style", "visibility: visible");
+  startGame();
+}
+
+function beforeEverything() {
+  const allButtons = document.querySelectorAll(".btn");
+  allButtons.forEach(el => {
+    el.setAttribute("style", "visibility: hidden");
+  });
+
+  textElement.setAttribute("style", "visibility: hidden");
+  optionButtonsElement.innerHTML = `<div class="IntroScreen">
+  <h1>Love and Loss</h1>
+  <h2>War Time Addition &copy;</h2>
+  <h5>Author: Stephen Coley</h5>
+  <form onSubmit="hello(event)">
+  <label>"Hello Citizen" says a uniformed man with a message in his hand. "We require your full name here, to insure that there is proper documentation denoting that you have recieved this summons"</label>
+  <input type="text" id="something" value="" >
+  <button class ="introButton" type="submit">Finish</button>
+  </form></div`;
+}
+
+beforeEverything();
+// startGame();
